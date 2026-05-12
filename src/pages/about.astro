@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/lib/site";
+---
+
+<BaseLayout title="About" description={`About ${SITE.name} — what we do and who we write for.`}>
+  <section class="container-article py-12 md:py-16">
+    <h1 class="font-heading font-extrabold text-4xl md:text-5xl text-slate-deep tracking-tight">
+      About this site.
+    </h1>
+
+    <div class="prose prose-lg max-w-none mt-6">
+      <p>
+        The Yard Scout reviews backyard wellness equipment — hot tubs, saunas, cold plunges, and
+        the gear that turns a backyard into a recovery space. We write specifically for the
+        people choosing this equipment for their own homes: real specs, real prices, real
+        installation gotchas, and real long-term ownership reality.
+      </p>
+
+      <p>
+        That focus matters. Most backyard-wellness content online reads like a brochure for the
+        highest-paying affiliate program. The choices people actually face — inflatable vs hard-sided
+        hot tub, infrared vs traditional sauna, plunge tub vs DIY cold therapy setup, brand A vs
+        brand B at the same price point — aren't covered honestly anywhere else. We cover them
+        specifically.
+      </p>
+
+      <h2>What we cover</h2>
+      <ul>
+        <li>Hot tubs — inflatable (SaluSpa, Coleman, Intex), hard-sided, and the buying decision between them.</li>
+        <li>Saunas — outdoor barrel, indoor cabin, infrared, traditional steam, and the brands at each price tier (Almost Heaven, Clearlight, Sun Home, Sunlighten).</li>
+        <li>Cold plunges — premium tubs, DIY chest-freezer builds, water chillers, ice baths, and the operator reality of cold therapy.</li>
+        <li>Installation, electrical, and pad-prep considerations most reviews skip.</li>
+        <li>Contrast therapy — the sauna-then-cold-plunge protocol that's driving most current demand.</li>
+      </ul>
+
+      <h2>What we don't do</h2>
+      <ul>
+        <li>We don't push the highest-paying affiliate offer over the genuinely better one.</li>
+        <li>We don't pretend a $300 inflatable and a $15,000 cedar-sided spa are equivalent.</li>
+        <li>We don't write breathless wellness claims our readers can't verify.</li>
+      </ul>
+
+      <p>
+        Read our <a href="/editorial-standards">editorial standards</a> for specifics on how we
+        source, review, and update content.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

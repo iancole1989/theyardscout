@@ -1,0 +1,117 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { SITE } from "@/lib/site";
+
+const now = Date.now();
+const articles = (
+  await getCollection(
+    "articles",
+    ({ data }) => !data.draft && data.publishedAt.valueOf() <= now,
+  )
+).sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+};
+---
+
+<BaseLayout title={SITE.name} description={SITE.description} jsonLd={websiteJsonLd}>
+  <section class="container-wide py-16 md:py-24">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-rust mb-3">
+        Backyard wellness — tested, not theorized
+      </p>
+      <h1 class="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-slate-deep leading-[1.1]">
+        Honest reviews of backyard recovery gear.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-slate-charcoal leading-relaxed">
+        Real specs. Real prices. Real installation gotchas. Hot tubs, saunas, and cold
+        plunges that earn their backyard square footage — and the ones that don't.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-wide pb-20">
+    <div class="flex items-end justify-between mb-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-slate-deep">
+        Reviews & Guides
+      </h2>
+      <span class="text-sm text-caution">
+        {articles.length} {articles.length === 1 ? "guide" : "guides"}
+      </span>
+    </div>
+
+    {
+      articles.length === 0 ? (
+        <div class="bg-canvas-subtle border border-line rounded-md p-10 text-center">
+          <p class="font-heading font-bold text-xl text-slate-deep mb-2">Articles publishing soon</p>
+          <p class="text-slate-charcoal max-w-md mx-auto">
+            We're finalising the first wave of hot tub, sauna, and cold plunge reviews. Check back shortly.
+          </p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {articles.map((article) => (
+            <a
+              href={`/${article.slug}/`}
+              class="group block bg-canvas-white border border-line rounded-md p-5 hover:border-rust hover:shadow-sm transition-all"
+            >
+              {article.data.isPillar && (
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-rust mb-2">
+                  Pillar guide
+                </span>
+              )}
+              {article.data.isComparison && (
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-rust mb-2">
+                  Comparison
+                </span>
+              )}
+              <h3 class="font-heading font-bold text-lg text-slate-deep group-hover:text-rust transition-colors leading-snug">
+                {article.data.title}
+              </h3>
+              <p class="mt-2 text-sm text-slate-charcoal leading-relaxed line-clamp-3">
+                {article.data.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="bg-canvas-subtle border-y border-line">
+    <div class="container-wide py-14 md:py-16">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div>
+          <h2 class="font-heading font-bold text-2xl md:text-3xl text-slate-deep mb-3">
+            Why we wrote this site.
+          </h2>
+          <p class="text-slate-charcoal leading-relaxed">
+            Most backyard-wellness content reads like a brochure for the highest-paying affiliate.
+            We test the gear, name the actual tradeoffs (cost, install complexity, electricity load,
+            cold-weather behaviour), and recommend by what works — not by what pays best.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-bold text-2xl md:text-3xl text-slate-deep mb-3">
+            How we work.
+          </h2>
+          <ul class="text-slate-charcoal leading-relaxed space-y-2 text-sm">
+            <li>→ Every spec, price, and dimension is checked against the manufacturer source.</li>
+            <li>→ Affiliate recommendations are tested against owner usability — not commission size.</li>
+            <li>→ We name installation complications most reviews skip (electrical, drainage, pad prep).</li>
+            <li>→ Every commercial review re-checked quarterly for stale data.</li>
+          </ul>
+          <p class="mt-3 text-sm">
+            <a href="/editorial-standards" class="text-rust underline">Read our editorial standards →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
