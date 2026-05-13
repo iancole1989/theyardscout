@@ -1,0 +1,78 @@
+# theyardscout.com — Cloudflare Pages / Workers redirects
+# Format: /old-path  /new-path  STATUS
+# Used to migrate the WordPress URLs to the new Astro site without losing SEO equity.
+
+# ===== TIER 3 — DUPLICATE CONSOLIDATION =====
+# Old WP duplicates 301 to canonical
+/saluspa-coronado-2/                                        /saluspa-coronado/                                          301
+/wood-fired-hot-tub-2/                                      /inflatable-hot-tub/                                        301
+/portable-infrared-sauna-2/                                 /outdoor-sauna/                                             301
+/intex-pure-spa-4-person-2/                                 /coleman-saluspa/                                           301
+/massage-chair-reviews-2/                                   /                                                           301
+/how-to-build-a-sauna-outside/                              /barrel-sauna/                                              301
+/build-a-sauna/                                             /barrel-sauna/                                              301
+/sauna-vs-steam-room-benefits/                              /outdoor-sauna/                                             301
+
+# ===== HOT TUB CLUSTER — REDIRECT TO PILLAR OR BUYER GUIDE =====
+/saluspa-airjet-hot-tub-heater-pump-replacement/            /inflatable-hot-tub/                                        301
+/wood-fired-hot-tub/                                        /inflatable-hot-tub/                                        301
+/hot-tub-spokane/                                           /best-hot-tubs-consumer-reports/                            301
+/hot-tub-installation-near-me/                              /best-hot-tubs-consumer-reports/                            301
+/hot-tub-covers/                                            /coleman-saluspa/                                           301
+/coleman-inflatable-hot-tub-cover/                          /coleman-saluspa/                                           301
+/home-hot-tub/                                              /best-hot-tubs-consumer-reports/                            301
+/8-person-hot-tub/                                          /best-hot-tubs-consumer-reports/                            301
+/hot-tub-8-person/                                          /best-hot-tubs-consumer-reports/                            301
+/cedar-hot-tub/                                             /best-hot-tubs-consumer-reports/                            301
+/hot-tubs-for-sale/                                         /best-hot-tubs-consumer-reports/                            301
+/hot-tub-repair-santa-rosa/                                 /best-hot-tubs-consumer-reports/                            301
+/hot-tubs-for-sale-costco/                                  /best-hot-tubs-consumer-reports/                            301
+/beachcomber-350-hot-tub/                                   /best-hot-tubs-consumer-reports/                            301
+/saluspa-hawaii-hot-tub/                                    /soaking-up-the-good-times-a-review-of-the-bestway-saluspa-miami-inflatable-hot-tub/  301
+/benefits-of-hot-tub/                                       /best-hot-tubs-consumer-reports/                            301
+/intex-spa-parts/                                           /coleman-saluspa/                                           301
+/intex-pure-spa-4-person/                                   /coleman-saluspa/                                           301
+
+# ===== SAUNA CLUSTER — REDIRECT TO PILLARS =====
+/how-to-build-a-sauna/                                      /barrel-sauna/                                              301
+/sauna-suit/                                                /outdoor-sauna/                                             301
+/portable-infrared-sauna/                                   /outdoor-sauna/                                             301
+/sauna-2-person/                                            /almost-heaven-duet-2-person-outdoor-sauna/                 301
+/hot-sauna-near-me/                                         /outdoor-sauna/                                             301
+/low-emf-infrared-sauna/                                    /outdoor-sauna/                                             301
+/sauna-vs-steam-room/                                       /outdoor-sauna/                                             301
+/sun-home-saunas/                                           /outdoor-sauna/                                             301
+/barrel-sauna-costco/                                       /barrel-sauna/                                              301
+/clearlight-infrared-sauna-price/                           /outdoor-sauna/                                             301
+/wood-burning-sauna-stove/                                  /barrel-sauna/                                              301
+/how-long-should-you-stay-in-a-sauna/                       /outdoor-sauna/                                             301
+/can-sauna-help-with-cold/                                  /outdoor-sauna/                                             301
+/infrared-vs-steam-sauna/                                   /outdoor-sauna/                                             301
+/sunlighten-sauna/                                          /outdoor-sauna/                                             301
+/benefits-of-sauna/                                         /outdoor-sauna/                                             301
+/finnleo-sauna/                                             /outdoor-sauna/                                             301
+/almost-heaven-barrel-sauna/                                /almost-heaven-sauna/                                       301
+
+# ===== COLD PLUNGE CLUSTER — REDIRECT TO DIY PILLAR =====
+/arctic-warriors-cold-plunge/                               /diy-cold-plunge/                                           301
+/cold-plunge-benefits-for-women/                            /diy-cold-plunge/                                           301
+
+# ===== OFF-NICHE / NON-SAVABLE — REDIRECT TO HOME =====
+/massage-chair-reviews/                                     /                                                           301
+
+# ===== FORWARD REFERENCES (linked from new articles, not yet authored) =====
+# These slugs are linked from articles but not yet written — redirect to pillars.
+# Remove these as articles are authored.
+/best-inflatable-hot-tub/                                   /inflatable-hot-tub/                                        301
+
+# ===== CATEGORY ARCHIVE PAGES (legacy WP categories) =====
+/category/blow-up-hot-tub/                                  /inflatable-hot-tub/                                        301
+/category/outdoor-sauna/                                    /outdoor-sauna/                                             301
+/category/cold-plunge/                                      /diy-cold-plunge/                                           301
+/category/uncategorized/                                    /                                                           301
+
+# ===== AUTHOR ARCHIVE (legacy WP) =====
+/author/ian/                                                /about/                                                     301
+
+# ===== TAG ARCHIVES (catch-all for any /tag/* legacy URLs) =====
+/tag/*                                                      /                                                           301
