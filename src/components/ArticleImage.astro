@@ -1,0 +1,52 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  creditHref?: string;
+  aspectRatio?: string;
+  fit?: "cover" | "contain";
+}
+
+const {
+  src,
+  alt,
+  caption,
+  credit,
+  creditHref,
+  aspectRatio = "16/9",
+  fit = "cover",
+} = Astro.props;
+---
+
+<figure class="my-8">
+  <div
+    class="overflow-hidden rounded-md bg-canvas-subtle border border-line"
+    style={`aspect-ratio: ${aspectRatio};`}
+  >
+    <img
+      src={src}
+      alt={alt}
+      class={`w-full h-full ${fit === "cover" ? "object-cover" : "object-contain"}`}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  {(caption || credit) && (
+    <figcaption class="mt-2 text-xs text-caution leading-relaxed flex flex-wrap items-center gap-x-2">
+      {caption && <span>{caption}</span>}
+      {credit && (
+        <span>
+          {caption && <span class="text-line">·</span>}
+          Photo:{" "}
+          {creditHref ? (
+            <a href={creditHref} class="underline hover:text-teal-hover" rel="nofollow noopener" target="_blank">{credit}</a>
+          ) : (
+            credit
+          )}
+        </span>
+      )}
+    </figcaption>
+  )}
+</figure>
