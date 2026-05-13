@@ -1,7 +1,7 @@
 ---
 export interface Props {
   href: string;
-  variant?: "affiliate" | "leadmagnet" | "closeiron" | "primary" | "secondary";
+  variant?: "affiliate" | "leadmagnet" | "primary" | "secondary";
   rel?: string;
   target?: string;
   ctaType?: string;
@@ -23,7 +23,6 @@ const baseClasses =
 const variantClasses = {
   affiliate: "bg-teal text-white hover:bg-teal-hover",
   leadmagnet: "bg-slate-deep text-white hover:bg-slate-charcoal",
-  closeiron: "bg-canvas-card text-slate-deep border border-line hover:bg-line",
   primary: "bg-teal text-white hover:bg-teal-hover",
   secondary: "bg-canvas-card text-slate-deep border border-line hover:bg-line",
 }[variant];

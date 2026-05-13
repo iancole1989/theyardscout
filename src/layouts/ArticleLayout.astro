@@ -31,7 +31,7 @@ const {
   isComparison = false,
 } = Astro.props;
 
-const articleUrl = new URL(`/llc-guide/${slug}`, SITE.url).toString();
+const articleUrl = new URL(`/${slug}/`, SITE.url).toString();
 
 const articleJsonLd = {
   "@context": "https://schema.org",
@@ -68,7 +68,7 @@ const articleJsonLd = {
     <Breadcrumbs
       items={[
         { label: "Home", href: "/" },
-        { label: "LLC Guides", href: "/" },
+        { label: "Reviews", href: "/" },
         { label: title },
       ]}
     />

@@ -9,17 +9,17 @@ export interface Props {
 }
 
 const {
-  headline = "LLC done. Now finance the property.",
-  body = "Once your LLC is set up, CloseIron runs an instant assessment on what investment-property financing you'd qualify for — DSCR, bridge, fix-and-flip. Sixty-second quiz, no credit pull, vetted lender match.",
-  ctaLabel = "See what you'd qualify for →",
-  ctaHref = "https://closeiron.com/quiz/dscr",
+  headline = "Honest backyard wellness reviews — every two weeks.",
+  body = "We test hot tubs, saunas, and cold plunges. No 'best ever!' superlatives. No commission-driven rankings. Real specs, install costs, and owner reality. Drop your email for the next batch.",
+  ctaLabel = "Subscribe →",
+  ctaHref = "mailto:hello@theyardscout.com?subject=Subscribe",
 } = Astro.props;
 ---
 
 <aside class="my-8 bg-canvas-subtle border-l-4 border-teal rounded-r-md p-6">
   <h3 class="font-heading font-bold text-xl text-slate-deep mb-2">{headline}</h3>
   <p class="text-slate-charcoal leading-relaxed mb-4">{body}</p>
-  <CTAButton href={ctaHref} variant="closeiron" ctaType="closeiron-handoff">
+  <CTAButton href={ctaHref} variant="primary" ctaType="newsletter-signup">
     {ctaLabel}
   </CTAButton>
 </aside>
