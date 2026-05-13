@@ -55,28 +55,40 @@ const websiteJsonLd = {
           </p>
         </div>
       ) : (
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article) => (
             <a
               href={`/${article.slug}/`}
-              class="group block bg-canvas-white border border-line rounded-md p-5 hover:border-teal hover:shadow-sm transition-all"
+              class="group block bg-canvas-white border border-line rounded-md overflow-hidden hover:border-teal hover:shadow-sm transition-all"
             >
-              {article.data.isPillar && (
-                <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
-                  Pillar guide
-                </span>
+              {article.data.heroImage && (
+                <div class="aspect-[1200/630] overflow-hidden bg-canvas-subtle">
+                  <img
+                    src={article.data.heroImage}
+                    alt={article.data.heroImageAlt ?? ""}
+                    class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
               )}
-              {article.data.isComparison && (
-                <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
-                  Comparison
-                </span>
-              )}
-              <h3 class="font-heading font-bold text-lg text-slate-deep group-hover:text-teal-hover transition-colors leading-snug">
-                {article.data.title}
-              </h3>
-              <p class="mt-2 text-sm text-slate-charcoal leading-relaxed line-clamp-3">
-                {article.data.description}
-              </p>
+              <div class="p-5">
+                {article.data.isPillar && (
+                  <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
+                    Pillar guide
+                  </span>
+                )}
+                {article.data.isComparison && (
+                  <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
+                    Comparison
+                  </span>
+                )}
+                <h3 class="font-heading font-bold text-lg text-slate-deep group-hover:text-teal-hover transition-colors leading-snug">
+                  {article.data.title}
+                </h3>
+                <p class="mt-2 text-sm text-slate-charcoal leading-relaxed line-clamp-3">
+                  {article.data.description}
+                </p>
+              </div>
             </a>
           ))}
         </div>

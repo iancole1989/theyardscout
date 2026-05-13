@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Hot tub illustration">
+  <rect width="1200" height="630" fill="#F4F1E8" />
+
+  <!-- Subtle ground line -->
+  <line x1="0" y1="500" x2="1200" y2="500" stroke="#D9D4C5" stroke-width="2" />
+
+  <!-- Steam wisps -->
+  <g fill="none" stroke="#7C9885" stroke-width="3" stroke-linecap="round" opacity="0.55">
+    <path d="M 480 220 Q 470 180, 490 150 Q 510 120, 495 90" />
+    <path d="M 600 200 Q 590 160, 615 130 Q 640 100, 620 65" />
+    <path d="M 720 220 Q 710 180, 730 150 Q 750 120, 735 90" />
+  </g>
+
+  <!-- Hot tub body — oval/rounded -->
+  <ellipse cx="600" cy="430" rx="290" ry="55" fill="#1A2424" opacity="0.06" />
+
+  <!-- Hot tub rim (outer) -->
+  <ellipse cx="600" cy="400" rx="285" ry="75" fill="none" stroke="#1A2424" stroke-width="4" />
+
+  <!-- Hot tub water surface -->
+  <ellipse cx="600" cy="395" rx="260" ry="55" fill="#0F766E" opacity="0.18" />
+  <ellipse cx="600" cy="395" rx="260" ry="55" fill="none" stroke="#0F766E" stroke-width="2.5" />
+
+  <!-- Water ripples -->
+  <ellipse cx="540" cy="390" rx="50" ry="10" fill="none" stroke="#0F766E" stroke-width="1.5" opacity="0.4" />
+  <ellipse cx="660" cy="400" rx="40" ry="8" fill="none" stroke="#0F766E" stroke-width="1.5" opacity="0.4" />
+
+  <!-- Bubble jets dots around perimeter -->
+  <g fill="#0F766E" opacity="0.45">
+    <circle cx="380" cy="395" r="3" />
+    <circle cx="430" cy="385" r="3" />
+    <circle cx="490" cy="382" r="3" />
+    <circle cx="710" cy="382" r="3" />
+    <circle cx="770" cy="385" r="3" />
+    <circle cx="820" cy="395" r="3" />
+  </g>
+
+  <!-- Brand wordmark area in lower left -->
+  <g transform="translate(80, 540)">
+    <circle cx="10" cy="14" r="10" fill="none" stroke="#0F766E" stroke-width="2.5" />
+    <circle cx="10" cy="14" r="4" fill="#7C9885" />
+    <text x="32" y="22" font-family="'DM Sans', system-ui, sans-serif" font-weight="600" font-size="20" fill="#1A2424">The Yard Scout</text>
+  </g>
+</svg>
