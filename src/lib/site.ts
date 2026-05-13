@@ -8,7 +8,7 @@ export const SITE = {
   author: "The Yard Scout team",
   ogImage: "/og-default.svg",
   twitterHandle: "@theyardscout",
-  gaMeasurementId: "", // TODO: set TYS GA4 measurement ID
+  gaMeasurementId: "G-VBEZ3ZRJ8F",
 } as const;
 
 export const NAV = [
