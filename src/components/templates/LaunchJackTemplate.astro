@@ -1,0 +1,120 @@
+---
+// Launch jacking / pre-launch template.
+// Based on Goldmine #11 Launch Jacking pattern. Designed to capture spike
+// branded searches when a new product launches (new SaluSpa model, new
+// Plunge product, new Almost Heaven sauna release).
+//
+// Key feature: a launch banner at top showing launch status (pre-launch /
+// launch-week / post-launch). Articles using this template should be
+// published 7-14 days before the launch event to rank by launch day.
+//
+// Usage:
+//   <LaunchJackTemplate
+//     productName="SaluSpa Coronado AirJet Plus 2026"
+//     launchDate="2026-07-01"
+//     verdictLine="Bestway's updated 2026 Coronado adds ChemConnect 2.0 dispenser, improved insulation, and a redesigned pump unit."
+//     preorderHref="https://affiliate.example.com/coronado-2026"
+//     preorderLabel="See 2026 Coronado launch details →"
+//     priceRange="$550-750"
+//     keyChanges={["ChemConnect 2.0 chlorine dispenser", "2.5kW heater (up from 2.2kW)", "Improved insulation rating"]}
+//   >
+//     ...full article body...
+//   </LaunchJackTemplate>
+
+export interface Props {
+  productName: string;
+  launchDate: string; // ISO 8601 YYYY-MM-DD
+  verdictLine?: string;
+  preorderHref?: string;
+  preorderLabel?: string;
+  priceRange?: string;
+  keyChanges?: string[];
+}
+
+const {
+  productName,
+  launchDate,
+  verdictLine,
+  preorderHref,
+  preorderLabel = "See launch details →",
+  priceRange,
+  keyChanges = [],
+} = Astro.props;
+
+const launch = new Date(launchDate);
+const now = new Date();
+const msPerDay = 86400000;
+const daysToLaunch = Math.ceil((launch.getTime() - now.getTime()) / msPerDay);
+
+let status: "pre-launch" | "launch-week" | "launched" = "launched";
+let statusLabel = "Launched";
+let statusBg = "bg-sage-muted";
+
+if (daysToLaunch > 7) {
+  status = "pre-launch";
+  statusLabel = `Launches in ${daysToLaunch} days`;
+  statusBg = "bg-teal text-white";
+} else if (daysToLaunch >= 0) {
+  status = "launch-week";
+  statusLabel = daysToLaunch === 0 ? "Launching today" : `Launches in ${daysToLaunch} day${daysToLaunch === 1 ? "" : "s"}`;
+  statusBg = "bg-teal text-white";
+} else {
+  statusLabel = `Launched ${Math.abs(daysToLaunch)} day${Math.abs(daysToLaunch) === 1 ? "" : "s"} ago`;
+  statusBg = "bg-canvas-card text-slate-deep";
+}
+
+const launchDateFormatted = launch.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<div class="launch-jack-template">
+  <aside class="my-6 rounded-md overflow-hidden border border-line">
+    <div class={`px-5 py-3 ${statusBg} flex flex-wrap items-center justify-between gap-3`}>
+      <span class="text-xs font-bold uppercase tracking-wider">
+        {statusLabel}
+      </span>
+      <time datetime={launchDate} class="text-xs">
+        Launch date: {launchDateFormatted}
+      </time>
+    </div>
+    <div class="p-5 md:p-6 bg-canvas-white">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-slate-deep mb-2">
+        {productName}
+      </h2>
+      {verdictLine && (
+        <p class="text-slate-charcoal leading-relaxed mb-4">{verdictLine}</p>
+      )}
+      {keyChanges.length > 0 && (
+        <div class="mb-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-teal mb-2">What's new</p>
+          <ul class="space-y-1.5">
+            {keyChanges.map((c) => (
+              <li class="flex gap-2 text-sm text-slate-charcoal">
+                <span class="text-teal font-bold flex-shrink-0">→</span>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {priceRange && (
+        <p class="text-sm mb-3">
+          <span class="text-caution">Expected price:</span>{" "}
+          <span class="font-semibold text-slate-deep">{priceRange}</span>
+        </p>
+      )}
+      {preorderHref && (
+        <a
+          href={preorderHref}
+          class="inline-flex items-center px-5 py-2.5 rounded-md font-semibold text-sm bg-teal text-white hover:bg-teal-hover no-underline transition-colors"
+          rel="sponsored noopener noreferrer"
+          target="_blank"
+          data-cta-type="launch-jack-affiliate"
+        >
+          {preorderLabel}
+        </a>
+      )}
+    </div>
+  </aside>
+
+  <slot />
+</div>

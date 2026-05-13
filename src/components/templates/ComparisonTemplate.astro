@@ -1,0 +1,93 @@
+---
+// A vs B comparison template.
+// Renders a structured side-by-side header card with both options, their
+// "verdict" / "best for" framing, and pricing. The article body (children)
+// covers the detailed dimensions of comparison.
+//
+// Usage:
+//   <ComparisonTemplate
+//     leftName="Almost Heaven Salem"
+//     leftVerdict="Best mid-tier value for 4-person traditional sauna"
+//     leftPrice="$4,500-5,500"
+//     leftAffiliateHref="..."
+//     rightName="Dundalk Salem"
+//     rightVerdict="Premium clear-grade cedar at +60% price"
+//     rightPrice="$7,000-8,500"
+//     rightAffiliateHref="..."
+//     summary="Same capacity; different cedar grade and warranty terms."
+//   >
+//     ...detailed comparison sections in MDX...
+//   </ComparisonTemplate>
+
+export interface Props {
+  leftName: string;
+  leftVerdict?: string;
+  leftPrice?: string;
+  leftBestFor?: string;
+  leftAffiliateHref?: string;
+  leftAffiliateLabel?: string;
+  rightName: string;
+  rightVerdict?: string;
+  rightPrice?: string;
+  rightBestFor?: string;
+  rightAffiliateHref?: string;
+  rightAffiliateLabel?: string;
+  summary?: string;
+}
+
+const {
+  leftName, leftVerdict, leftPrice, leftBestFor, leftAffiliateHref, leftAffiliateLabel = "See current price →",
+  rightName, rightVerdict, rightPrice, rightBestFor, rightAffiliateHref, rightAffiliateLabel = "See current price →",
+  summary,
+} = Astro.props;
+
+const card = (name: string, verdict?: string, price?: string, bestFor?: string, href?: string, label?: string, badge?: string) => ({ name, verdict, price, bestFor, href, label, badge });
+
+const sides = [
+  card(leftName, leftVerdict, leftPrice, leftBestFor, leftAffiliateHref, leftAffiliateLabel),
+  card(rightName, rightVerdict, rightPrice, rightBestFor, rightAffiliateHref, rightAffiliateLabel),
+];
+---
+
+<div class="comparison-template">
+  <section class="my-8">
+    {summary && (
+      <p class="text-base md:text-lg text-slate-charcoal leading-relaxed mb-5">{summary}</p>
+    )}
+
+    <div class="grid md:grid-cols-2 gap-5">
+      {sides.map((s) => (
+        <div class="bg-canvas-white border border-line rounded-md p-5 flex flex-col">
+          <h3 class="font-heading font-bold text-xl text-slate-deep mb-1">{s.name}</h3>
+          {s.bestFor && (
+            <p class="text-xs font-semibold uppercase tracking-wider text-teal mb-3">
+              Best for: {s.bestFor}
+            </p>
+          )}
+          {s.verdict && (
+            <p class="text-slate-charcoal leading-relaxed flex-1">{s.verdict}</p>
+          )}
+          {s.price && (
+            <p class="mt-3 text-sm">
+              <span class="text-caution">Price:</span>{" "}
+              <span class="font-semibold text-slate-deep">{s.price}</span>
+            </p>
+          )}
+          {s.href && (
+            <a
+              href={s.href}
+              class="inline-flex items-center justify-center mt-3 px-4 py-2 rounded-md font-semibold text-sm bg-teal text-white hover:bg-teal-hover no-underline transition-colors"
+              rel="sponsored noopener noreferrer"
+              target="_blank"
+              data-cta-type="comparison-affiliate"
+            >
+              {s.label}
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <slot />
+</div>

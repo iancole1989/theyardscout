@@ -1,0 +1,103 @@
+---
+// Formalizes the single-product review pattern.
+// Based on Goldmine Module 11.11 "Review Article Outline" structure,
+// flexed for higher-competition keywords (we run 2,000-3,500 words vs Caluori's 800-1,500).
+//
+// Usage in MDX:
+//   <ReviewTemplate
+//     productName="SaluSpa Coronado"
+//     verdict="Right for 1-2 person households committed to mid-tier inflatable spa use"
+//     score={4.0}
+//     priceRange="$500-700"
+//     affiliateHref="https://affiliate.example.com/coronado"
+//     affiliateLabel="See current price →"
+//     keyFeatures={[ "140 air jets", "4-6 person capacity", ... ]}
+//   >
+//     ...your MDX intro / pros / cons / sections / FAQ go inside as children
+//   </ReviewTemplate>
+
+export interface Props {
+  productName: string;
+  verdict?: string;
+  score?: number; // 0-5
+  priceRange?: string;
+  affiliateHref?: string;
+  affiliateLabel?: string;
+  keyFeatures?: string[];
+}
+
+const {
+  productName,
+  verdict,
+  score,
+  priceRange,
+  affiliateHref,
+  affiliateLabel = "See current price →",
+  keyFeatures,
+} = Astro.props;
+
+const fullStars = score ? Math.floor(score) : 0;
+const halfStar = score ? score - fullStars >= 0.5 : false;
+---
+
+<div class="review-template">
+  {(verdict || score || priceRange || affiliateHref) && (
+    <aside class="my-6 bg-canvas-subtle border border-line rounded-md p-5 md:p-6">
+      <h2 class="font-heading font-bold text-base uppercase tracking-wider text-slate-deep mb-3">
+        At a glance: {productName}
+      </h2>
+      <dl class="space-y-2 text-sm">
+        {score !== undefined && (
+          <div class="flex gap-2">
+            <dt class="font-semibold text-slate-deep min-w-[100px]">Rating:</dt>
+            <dd class="text-slate-charcoal">
+              <span class="text-teal" aria-label={`${score} out of 5`}>
+                {"★".repeat(fullStars)}{halfStar ? "½" : ""}{"☆".repeat(5 - fullStars - (halfStar ? 1 : 0))}
+              </span>
+              <span class="ml-2">{score.toFixed(1)} / 5</span>
+            </dd>
+          </div>
+        )}
+        {priceRange && (
+          <div class="flex gap-2">
+            <dt class="font-semibold text-slate-deep min-w-[100px]">Price:</dt>
+            <dd class="text-slate-charcoal">{priceRange}</dd>
+          </div>
+        )}
+        {verdict && (
+          <div class="flex gap-2">
+            <dt class="font-semibold text-slate-deep min-w-[100px]">Verdict:</dt>
+            <dd class="text-slate-charcoal">{verdict}</dd>
+          </div>
+        )}
+      </dl>
+      {affiliateHref && (
+        <a
+          href={affiliateHref}
+          class="inline-flex items-center justify-center mt-4 px-5 py-2.5 rounded-md font-semibold text-sm bg-teal text-white hover:bg-teal-hover no-underline transition-colors"
+          rel="sponsored noopener noreferrer"
+          target="_blank"
+          data-cta-type="review-summary-affiliate"
+        >
+          {affiliateLabel}
+        </a>
+      )}
+    </aside>
+  )}
+
+  {keyFeatures && keyFeatures.length > 0 && (
+    <aside class="my-6">
+      <h2 class="font-heading font-bold text-lg text-slate-deep mb-3">Key features</h2>
+      <ul class="space-y-1.5 text-slate-charcoal">
+        {keyFeatures.map((f) => (
+          <li class="flex gap-2 leading-relaxed">
+            <span class="text-teal font-bold flex-shrink-0">→</span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
+
+  <slot />
+</div>

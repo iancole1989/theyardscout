@@ -1,0 +1,122 @@
+---
+// Lead generation template.
+// Based on Goldmine "How to Sell Your X BIZ" series. Adapted for funneling
+// readers into a multi-step quiz/form (e.g. CloseIron quiz handoff, Gold IRA
+// affiliate quiz, sauna brand consult).
+//
+// The article body educates on the outcome the reader wants ("get matched
+// with a DSCR lender", "find your gold IRA company"). The lead-gen block
+// captures intent and routes to the partner quiz/form/affiliate funnel.
+//
+// Usage:
+//   <LeadGenTemplate
+//     outcome="Get matched with a DSCR lender in 60 seconds"
+//     subhead="Free, no credit pull, vetted lender network."
+//     bullets={[
+//       "Compare rates from 3-5 vetted DSCR lenders",
+//       "No credit pull during matching",
+//       "Match in under 2 minutes",
+//     ]}
+//     ctaLabel="Start matching →"
+//     ctaHref="https://closeiron.com/quiz/dscr"
+//     trustLine="50,000+ investors matched. SOC 2 compliant."
+//     position="top"
+//   >
+//     ...educational article body below...
+//   </LeadGenTemplate>
+
+export interface Props {
+  outcome: string;
+  subhead?: string;
+  bullets?: string[];
+  ctaLabel?: string;
+  ctaHref: string;
+  trustLine?: string;
+  position?: "top" | "bottom" | "both";
+  variant?: "primary" | "soft";
+}
+
+const {
+  outcome,
+  subhead,
+  bullets = [],
+  ctaLabel = "Get started →",
+  ctaHref,
+  trustLine,
+  position = "top",
+  variant = "primary",
+} = Astro.props;
+
+const block = `
+  <aside class="my-8 ${variant === "primary" ? "bg-teal text-white" : "bg-canvas-subtle border border-line text-slate-deep"} rounded-md p-6 md:p-8">
+    ...
+  </aside>
+`;
+---
+
+{(position === "top" || position === "both") && (
+  <aside class={`my-8 rounded-md p-6 md:p-8 ${variant === "primary" ? "bg-teal text-white" : "bg-canvas-subtle border border-line"}`}>
+    <h2 class={`font-heading font-bold text-2xl md:text-3xl ${variant === "primary" ? "text-white" : "text-slate-deep"} mb-2`}>
+      {outcome}
+    </h2>
+    {subhead && (
+      <p class={`text-base ${variant === "primary" ? "text-white/85" : "text-slate-charcoal"} leading-relaxed mb-4`}>
+        {subhead}
+      </p>
+    )}
+    {bullets.length > 0 && (
+      <ul class="space-y-1.5 mb-5">
+        {bullets.map((b) => (
+          <li class={`flex gap-2 text-sm md:text-base ${variant === "primary" ? "text-white/90" : "text-slate-charcoal"}`}>
+            <span class={`flex-shrink-0 font-bold ${variant === "primary" ? "text-sage-muted" : "text-teal"}`}>→</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+    <a
+      href={ctaHref}
+      class={`inline-flex items-center justify-center px-6 py-3 rounded-md font-semibold text-sm no-underline transition-colors ${
+        variant === "primary"
+          ? "bg-canvas-white text-teal hover:bg-canvas-subtle"
+          : "bg-teal text-white hover:bg-teal-hover"
+      }`}
+      data-cta-type="leadgen-primary"
+    >
+      {ctaLabel}
+    </a>
+    {trustLine && (
+      <p class={`mt-3 text-xs ${variant === "primary" ? "text-white/70" : "text-caution"}`}>
+        {trustLine}
+      </p>
+    )}
+  </aside>
+)}
+
+<div class="leadgen-body">
+  <slot />
+</div>
+
+{(position === "bottom" || position === "both") && (
+  <aside class={`my-8 rounded-md p-6 md:p-8 ${variant === "primary" ? "bg-teal text-white" : "bg-canvas-subtle border border-line"}`}>
+    <h2 class={`font-heading font-bold text-2xl md:text-3xl ${variant === "primary" ? "text-white" : "text-slate-deep"} mb-2`}>
+      Ready? {outcome.split(/[—.]/, 1)[0]}.
+    </h2>
+    <a
+      href={ctaHref}
+      class={`inline-flex items-center justify-center px-6 py-3 rounded-md font-semibold text-sm no-underline transition-colors mt-3 ${
+        variant === "primary"
+          ? "bg-canvas-white text-teal hover:bg-canvas-subtle"
+          : "bg-teal text-white hover:bg-teal-hover"
+      }`}
+      data-cta-type="leadgen-bottom"
+    >
+      {ctaLabel}
+    </a>
+    {trustLine && (
+      <p class={`mt-3 text-xs ${variant === "primary" ? "text-white/70" : "text-caution"}`}>
+        {trustLine}
+      </p>
+    )}
+  </aside>
+)}

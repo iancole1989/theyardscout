@@ -1,0 +1,104 @@
+---
+// "Best of" / listicle template.
+// Formalizes the buyer's-guide pattern (Best Hot Tubs Consumer Reports etc.)
+// Articles pass a `picks` array with ranked products; this renders them with
+// consistent card UI + #1/#2/#3 visual hierarchy.
+//
+// Usage:
+//   <ListicleTemplate
+//     headline="Best inflatable hot tubs in 2026"
+//     introNote="6 picks tested across 4 weeks. Updated 2026-05-13."
+//     picks={[
+//       { rank: 1, name: "...", verdict: "...", priceRange: "...", affiliateHref: "...", bestFor: "..." },
+//       ...
+//     ]}
+//   >
+//     ...intro paragraphs above; methodology / FAQ / etc below
+//   </ListicleTemplate>
+
+export interface Pick {
+  rank: number;
+  name: string;
+  verdict: string;
+  priceRange?: string;
+  bestFor?: string;
+  affiliateHref?: string;
+  affiliateLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+export interface Props {
+  headline?: string;
+  introNote?: string;
+  picks: Pick[];
+}
+
+const {
+  headline = "Top picks",
+  introNote,
+  picks,
+} = Astro.props;
+---
+
+<div class="listicle-template">
+  <section class="my-8">
+    <header class="mb-6">
+      <h2 class="font-heading font-bold text-2xl text-slate-deep">{headline}</h2>
+      {introNote && <p class="mt-2 text-sm text-caution">{introNote}</p>}
+    </header>
+
+    <ol class="space-y-6">
+      {picks.map((pick) => (
+        <li class="bg-canvas-white border border-line rounded-md p-5 md:p-6 flex flex-col md:flex-row md:items-start gap-5">
+          <div class="md:w-40 flex-shrink-0">
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="font-heading font-extrabold text-3xl text-teal">#{pick.rank}</span>
+              {pick.rank === 1 && (
+                <span class="text-xs font-bold uppercase tracking-wider text-sage">Top pick</span>
+              )}
+            </div>
+            {pick.imageSrc && (
+              <img
+                src={pick.imageSrc}
+                alt={pick.imageAlt ?? pick.name}
+                class="mt-2 rounded-md w-full aspect-[4/3] object-cover bg-canvas-subtle"
+                loading="lazy"
+              />
+            )}
+          </div>
+
+          <div class="flex-1">
+            <h3 class="font-heading font-bold text-xl text-slate-deep mb-1">{pick.name}</h3>
+            {pick.bestFor && (
+              <p class="text-xs font-semibold uppercase tracking-wider text-teal mb-2">
+                Best for: {pick.bestFor}
+              </p>
+            )}
+            <p class="text-slate-charcoal leading-relaxed">{pick.verdict}</p>
+            {pick.priceRange && (
+              <p class="mt-2 text-sm">
+                <span class="text-caution">Price:</span>{" "}
+                <span class="font-semibold text-slate-deep">{pick.priceRange}</span>
+              </p>
+            )}
+            {pick.affiliateHref && (
+              <a
+                href={pick.affiliateHref}
+                class="inline-flex items-center mt-3 px-4 py-2 rounded-md font-semibold text-sm bg-teal text-white hover:bg-teal-hover no-underline transition-colors"
+                rel="sponsored noopener noreferrer"
+                target="_blank"
+                data-cta-type="listicle-affiliate"
+                data-listicle-rank={pick.rank}
+              >
+                {pick.affiliateLabel ?? "See current price →"}
+              </a>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <slot />
+</div>
