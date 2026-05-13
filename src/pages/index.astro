@@ -23,7 +23,7 @@ const websiteJsonLd = {
 <BaseLayout title={SITE.name} description={SITE.description} jsonLd={websiteJsonLd}>
   <section class="container-wide py-16 md:py-24">
     <div class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase tracking-wider text-rust mb-3">
+      <p class="text-sm font-semibold uppercase tracking-wider text-teal mb-3">
         Backyard wellness — tested, not theorized
       </p>
       <h1 class="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-slate-deep leading-[1.1]">
@@ -59,19 +59,19 @@ const websiteJsonLd = {
           {articles.map((article) => (
             <a
               href={`/${article.slug}/`}
-              class="group block bg-canvas-white border border-line rounded-md p-5 hover:border-rust hover:shadow-sm transition-all"
+              class="group block bg-canvas-white border border-line rounded-md p-5 hover:border-teal hover:shadow-sm transition-all"
             >
               {article.data.isPillar && (
-                <span class="inline-block text-xs font-bold uppercase tracking-wider text-rust mb-2">
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
                   Pillar guide
                 </span>
               )}
               {article.data.isComparison && (
-                <span class="inline-block text-xs font-bold uppercase tracking-wider text-rust mb-2">
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal mb-2">
                   Comparison
                 </span>
               )}
-              <h3 class="font-heading font-bold text-lg text-slate-deep group-hover:text-rust transition-colors leading-snug">
+              <h3 class="font-heading font-bold text-lg text-slate-deep group-hover:text-teal-hover transition-colors leading-snug">
                 {article.data.title}
               </h3>
               <p class="mt-2 text-sm text-slate-charcoal leading-relaxed line-clamp-3">
@@ -108,7 +108,7 @@ const websiteJsonLd = {
             <li>→ Every commercial review re-checked quarterly for stale data.</li>
           </ul>
           <p class="mt-3 text-sm">
-            <a href="/editorial-standards" class="text-rust underline">Read our editorial standards →</a>
+            <a href="/editorial-standards" class="text-teal underline">Read our editorial standards →</a>
           </p>
         </div>
       </div>

@@ -5,29 +5,30 @@ export default {
     extend: {
       colors: {
         slate: {
-          deep: "#1F2937",
-          charcoal: "#374151",
+          deep: "#1A2424",
+          charcoal: "#2D3838",
         },
-        rust: {
-          DEFAULT: "#D97706",
-          hover: "#B45309",
+        teal: {
+          DEFAULT: "#0F766E",
+          hover: "#134E4A",
         },
-        gold: {
-          muted: "#B45309",
+        sage: {
+          DEFAULT: "#7C9885",
+          muted: "#B5C7A8",
         },
         canvas: {
-          white: "#FFFFFF",
-          subtle: "#F9FAFB",
-          card: "#F3F4F6",
+          white: "#FFFEFB",
+          subtle: "#F4F1E8",
+          card: "#EAE4D3",
         },
-        line: "#E5E7EB",
+        line: "#D9D4C5",
         success: "#15803D",
         caution: "#6B7280",
       },
       fontFamily: {
-        sans: ["'Inter Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
-        heading: ["'Manrope Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
-        num: ["'Inter Tight Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["'DM Sans Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["'DM Sans Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
+        num: ["'DM Sans Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       maxWidth: {
         article: "740px",
@@ -35,22 +36,22 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            color: "#374151",
+            color: "#2D3838",
             maxWidth: "100%",
-            h1: { color: "#1F2937", fontFamily: "'Manrope Variable', ui-sans-serif, sans-serif" },
-            h2: { color: "#1F2937", fontFamily: "'Manrope Variable', ui-sans-serif, sans-serif" },
-            h3: { color: "#1F2937", fontFamily: "'Manrope Variable', ui-sans-serif, sans-serif" },
-            h4: { color: "#1F2937", fontFamily: "'Manrope Variable', ui-sans-serif, sans-serif" },
+            h1: { color: "#1A2424", fontFamily: "'DM Sans Variable', ui-sans-serif, sans-serif" },
+            h2: { color: "#1A2424", fontFamily: "'DM Sans Variable', ui-sans-serif, sans-serif" },
+            h3: { color: "#1A2424", fontFamily: "'DM Sans Variable', ui-sans-serif, sans-serif" },
+            h4: { color: "#1A2424", fontFamily: "'DM Sans Variable', ui-sans-serif, sans-serif" },
             a: {
-              color: "#D97706",
+              color: "#0F766E",
               textDecoration: "underline",
               fontWeight: 500,
-              "&:hover": { color: "#B45309" },
+              "&:hover": { color: "#134E4A" },
             },
-            strong: { color: "#1F2937" },
+            strong: { color: "#1A2424" },
             code: {
-              color: "#1F2937",
-              backgroundColor: "#F3F4F6",
+              color: "#1A2424",
+              backgroundColor: "#F4F1E8",
               padding: "0.125rem 0.375rem",
               borderRadius: "0.25rem",
               fontWeight: "500",

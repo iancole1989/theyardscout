@@ -30,7 +30,7 @@ const schema = {
       items.map((it, i) => (
         <li class="flex items-center gap-2">
           {it.href && i < items.length - 1 ? (
-            <a href={it.href} class="hover:text-rust">{it.label}</a>
+            <a href={it.href} class="hover:text-teal-hover">{it.label}</a>
           ) : (
             <span class="text-slate-charcoal">{it.label}</span>
           )}

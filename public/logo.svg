@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" width="320" height="48" role="img" aria-label="LLCforLandlords">
-  <rect x="0" y="20" width="10" height="10" rx="1.5" fill="#D97706" />
-  <text x="20" y="35" font-family="'Manrope', system-ui, sans-serif" font-weight="800" font-size="26" fill="#1F2937" letter-spacing="-0.5">LLCforLandlords</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" width="320" height="48" role="img" aria-label="The Yard Scout">
+  <circle cx="14" cy="24" r="8" fill="none" stroke="#0F766E" stroke-width="2.5" />
+  <circle cx="14" cy="24" r="3" fill="#7C9885" />
+  <text x="32" y="32" font-family="'DM Sans', system-ui, sans-serif" font-weight="700" font-size="22" fill="#1A2424" letter-spacing="-0.3">The Yard Scout</text>
 </svg>
