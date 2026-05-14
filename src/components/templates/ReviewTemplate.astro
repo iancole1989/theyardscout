@@ -16,8 +16,13 @@
 //     ...your MDX intro / pros / cons / sections / FAQ go inside as children
 //   </ReviewTemplate>
 
+import { productReviewEntity } from "@/lib/schema";
+import { SITE } from "@/lib/site";
+
 export interface Props {
   productName: string;
+  brand?: string;
+  category?: string;
   verdict?: string;
   score?: number; // 0-5
   priceRange?: string;
@@ -28,6 +33,8 @@ export interface Props {
 
 const {
   productName,
+  brand,
+  category,
   verdict,
   score,
   priceRange,
@@ -38,7 +45,27 @@ const {
 
 const fullStars = score ? Math.floor(score) : 0;
 const halfStar = score ? score - fullStars >= 0.5 : false;
+
+// Emit Product + Review schema. Uses Astro.url for the canonical URL.
+const reviewUrl = new URL(Astro.url.pathname, SITE.url).toString();
+const { product, review } = productReviewEntity({
+  productName,
+  brand,
+  category,
+  description: verdict,
+  priceRange,
+  affiliateHref,
+  ratingValue: score,
+  reviewUrl,
+  reviewTitle: `${productName} Review`,
+  reviewBody: verdict,
+});
 ---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": [product, review] })}
+/>
 
 <div class="review-template">
   {(verdict || score || priceRange || affiliateHref) && (
